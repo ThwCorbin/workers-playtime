@@ -2,6 +2,50 @@ let yourMegaNums = document.querySelector(".yourMegaNums");
 let yourPowerNums = document.querySelector(".yourPowerNums");
 let megaBtn = document.querySelector(".megaBtn");
 let powerBtn = document.querySelector(".powerBtn");
+let bigWin = document.querySelector(".bigWin");
+let smallWin = document.querySelector(".smallWin");
+
+//# Rotate and inject treats if we win big or small
+let bigWinTreat = () => {
+  let arr = [
+    "Travel the world by camel",
+    "Hire a personal cricket bat knocker-in-er",
+    "Take everyone to eat at Joe's",
+    "Find inner peace through hot air balloon photography",
+    "Climb the hill that's near Mt Everest",
+    "Lease a spaceplane for family holidays",
+    "Book Daft Punk for the kids' birthday parties",
+    "Buy your favorite animal from the zoo",
+    "Install electrified tomato cages and squirrel traps",
+    "Plant a lobster and butter tree"
+  ];
+  let treatNum = () => Math.floor(Math.random() * Math.floor(arr.length));
+  let text = document.createTextNode(arr[treatNum()]);
+  bigWin.innerText = "";
+  bigWin.appendChild(text);
+};
+
+let smallWinTreat = () => {
+  let arr = [
+    "Expand your interesting grey rock collection",
+    "Order pizza AND wings",
+    "Buy the good absinthe",
+    "Party at the car wash!",
+    "Take the kids to the double arches",
+    "Eat a jar of tiny shrimp with cocktail sauce",
+    "Pay for dry cleaning",
+    "Buy socks for most days of the week",
+    "Columbia House Records subscription!",
+    "7/11 surely has lobster on those rolly things"
+  ];
+  let treatNum = () => Math.floor(Math.random() * Math.floor(arr.length));
+  let text = document.createTextNode(arr[treatNum()]);
+  smallWin.innerText = "";
+  smallWin.appendChild(text);
+};
+
+bigWinTreat();
+smallWinTreat();
 
 //# Function returns 6 random numbers and injects them into DOM
 let yourRandNums = e => {
@@ -56,22 +100,14 @@ let yourRandNums = e => {
   e.target === megaBtn
     ? yourMegaNums.appendChild(li)
     : yourPowerNums.appendChild(li);
+  bigWinTreat();
+  smallWinTreat();
 };
 
 //# Call youRandNums with lottery parameters
 // window.addEventListener(onload, yourRandNums(event));
 megaBtn.addEventListener("click", yourRandNums);
 powerBtn.addEventListener("click", yourRandNums);
-
-// const bigWin1 = document.querySelector(".bigWin1");
-// const bigWin2 = document.querySelector(".bigWin2");
-// const smallWin1 = document.querySelector(".smallWin1");
-// const smallWin2 = document.querySelector(".smallWin2");
-// let bigWin = () => {};
-
-// let smallWin = () => {};
-// bigWin();
-// smallWin();
 
 //# Better Comments Key
 //# Label: (which I custom added to settings.json)

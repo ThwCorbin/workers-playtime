@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 	<head>
 		<meta charset="utf-8" />
@@ -8,34 +7,52 @@
 	</head>
 	<body>
 		<h1 class="heading">Workers' Playtime</h1>
-		<h2>You have to be in it to Win it!</h2>
+		<h2>You have to be in it<br />to Win it!</h2>
 
-		<h3> Your Mega Millions Numbers </h3>
+		<h3>Your Mega Millions Numbers</h3>
+		<ul class="your-nums-ul yourMegaNums"></ul>
 		<button type="button" class="megaBtn">New Numbers</button>
-		<ul class="your-nums-ul yourMegaNums">
-		<li>You need numbers to play!</li>
-		</ul>
 
-		<h3> Your Powerball Numbers </h3>
+		<h3>Your Powerball Numbers</h3>
+		<ul class="your-nums-ul yourPowerNums"></ul>
 		<button type="button" class="powerBtn">New Numbers</button>
-		<ul class="your-nums-ul yourPowerNums">
-		<li>You need numbers to play!</li>
-		</ul>
 
-		<h3>Big Winner</h3>
-		<ul>
-		<li class="win-li bigWin1"></li>
-		<li class="win-li bigWin2"></li>
-		</ul>
+		<h3>If you are a Big Winner:</h3>
+		<p class="win bigWin"></p>
 
-		<hr>
+		<h3>If you are a Small Winner:</h3>
+		<p class="win smallWin"></p>
 
-		<h3>Small Winner</h3>
-		<ul>
-		<li class="win-li smallWin1"></li>
-		<li class="win-li smallWin2"></li>
-		</ul>
+		<h3>
+			Need some special numbers for another lottery? Provide us the initial
+			number of balls for the first five balls and the sixth ball, and we will
+			set you up for random glory.
+		</h3>
+		<form
+			action="submit"
+			name="formspecial"
+			id="form-special"
+			class="form-special"
+		>
+			<label class="form-label"
+				>Balls (30-75): <input type:"number" name="balls" value="70" min="30"
+				max="75" class="form-input form-input-num">
+			</label>
 
+			<label class="form-label"
+				>Extra Balls (20-75): <input type:"number" name="extraBalls" value="25"
+				min="20" max="75" class="form-input form-input-num">
+			</label>
+			<input
+				type="submit"
+				value="Get Numbers!"
+				class="form-input form-input-submit"
+			/>
+		</form>
+
+		<h3>Your Special Numbers</h3>
+		<ul class="your-nums-ul yourSpecialNums"></ul>
+		<button type="button" class="specialBtn">New Specials</button>
 	</body>
 	<script type="text/javascript" src="js/playtime.js"></script>
 </html>
