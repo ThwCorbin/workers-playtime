@@ -2,6 +2,26 @@ h1 {
 	color: green;
 }
 
-p {
+h2 {
+	color: darkcyan;
+}
+
+h3 {
+	color: blueviolet;
+}
+
+.your-nums-ul {
+	display: flex;
+	justify-content: space-between;
+	list-style-type: none;
+	width: 15em;
+}
+
+.your-nums-ul > li {
+	color: red;
+}
+
+.win-li {
 	color: blue;
+	list-style-type: none;
 }
