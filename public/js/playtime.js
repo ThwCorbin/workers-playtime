@@ -11,8 +11,8 @@ let errorNumsMessage = document.querySelector(".errorNumsMessage");
 let bigWin = document.querySelector(".bigWin");
 let smallWin = document.querySelector(".smallWin");
 
-//# Rotate and inject treats if we win big or small
-let bigWinTreat = () => {
+//# Pick random ideas if we win big or small
+let bigWinIdeas = () => {
   let arr = [
     "Travel the world by camel",
     "Hire a personal cricket batsman runner",
@@ -25,13 +25,13 @@ let bigWinTreat = () => {
     "Install electrified tomato cages and punji stick squirrel traps",
     "Plant a lobster and butter tree"
   ];
-  let treatNum = () => Math.floor(Math.random() * Math.floor(arr.length));
-  let text = document.createTextNode(arr[treatNum()]);
+  let ideaNum = () => Math.floor(Math.random() * Math.floor(arr.length));
+  let text = document.createTextNode(arr[ideaNum()]);
   bigWin.innerText = "";
   bigWin.appendChild(text);
 };
 
-let smallWinTreat = () => {
+let smallWinIdeas = () => {
   let arr = [
     "Expand your grey rock collection",
     "Order pizza AND wings",
@@ -44,14 +44,14 @@ let smallWinTreat = () => {
     "Columbia House Records subscription!",
     "7/11 surely has lobster on the rolly things"
   ];
-  let treatNum = () => Math.floor(Math.random() * Math.floor(arr.length));
-  let text = document.createTextNode(arr[treatNum()]);
+  let ideaNum = () => Math.floor(Math.random() * Math.floor(arr.length));
+  let text = document.createTextNode(arr[ideaNum()]);
   smallWin.innerText = "";
   smallWin.appendChild(text);
 };
 
-bigWinTreat();
-smallWinTreat();
+bigWinIdeas();
+smallWinIdeas();
 
 //# Function returns 6 random numbers and injects them into DOM
 let yourRandNums = e => {
@@ -121,10 +121,11 @@ let yourRandNums = e => {
     : e.target === btnPower
     ? yourPowerNums.appendChild(li)
     : yourSpecialNums.appendChild(li);
-  bigWinTreat();
-  smallWinTreat();
+  bigWinIdeas();
+  smallWinIdeas();
 };
 
+// todo form validation for numbers
 //# Return error message if user provided invalid numbers in form inputs
 let errorNums = () => {
   errorNumsMessage.removeAttribute("hidden");
