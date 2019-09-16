@@ -24,9 +24,10 @@
 		<p class="win smallWin"></p>
 
 		<h3>
-			Need some special numbers for another lottery? Provide the initial number
-			of balls in the draw, and we will set you up for random glory.
+			Need some special numbers for another lottery? Provide us with details,
+			and we will set you up for random glory. See example at bottom>
 		</h3>
+
 		<form
 			action="/"
 			method="post"
@@ -35,17 +36,25 @@
 			class="form-special"
 		>
 			<label class="form-label"
-				>First 5 Balls: <input type:"number" name="balls" value="70" required
-				min="30" max="75" class="form-input form-input-num formInputBalls"> (30
-				to 75 balls)
+				>Main Balls (1-6): <input type:"number" name="mainBalls" value="5"
+				required min="1" max="6" id="formInputMainBalls" class="form-input
+				form-input-num">
+				<br />
+				Main Balls High Number (30-75): <input type:"number" name="mainHigh"
+				value="70" required min="30" max="75" id="formInputMainHigh"
+				class="form-input form-input-num">
 			</label>
 
 			<label class="form-label"
-				>6th Ball: <input type:"number" name="extraBalls" value="25" required
-				min="20" max="45" class="form-input form-input-num formInputExtraBalls">
-				(20 to 45 balls)
+				>Extra Balls (0-2): <input type:"number" name="extraBalls" value="1"
+				required min="0" max="2" id="formInputExtraBalls" class="form-input
+				form-input-num">
+				<br />
+				Extra Balls High Number (0-45): <input type:"number" name="extraHigh"
+				value="25" required min="10" max="45" id="formInputExtraHigh"
+				class="form-input form-input-num">
 			</label>
-			<p class="errorNumsMessage" hidden>Use numbers between 30-75 and 20-75</p>
+			<p class="errorNumsMessage" hidden>See valid numbers in parentheses</p>
 			<input
 				type="submit"
 				value="Get Numbers!"
@@ -56,6 +65,14 @@
 		<h3>Your Special Numbers</h3>
 		<ul class="your-nums-ul yourSpecialNums"></ul>
 		<button type="button" class="btnNewSpecial">New Specials</button>
+
+		<h6>
+			Example 1: Euromillions has 5 main numbers (1-50) and 2 lucky stars
+			(1-12). Enter 5 and 50 for main balls, and enter 2 and 12 for extra balls.
+			<br />
+			Example 2: The UK's Lotto has 6 main numbers (1-59) and no extra numbers.
+			Enter 6 and 59 for main balls, and enter 0 and 0 for extra balls.
+		</h6>
 	</body>
 	<script type="text/javascript" src="js/playtime.js"></script>
 </html>
