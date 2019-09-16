@@ -17,6 +17,7 @@ h2,
 h3,
 p,
 ul,
+li,
 button,
 input {
 	padding: 0;
@@ -55,6 +56,7 @@ button,
 	justify-content: space-around;
 	list-style-type: none;
 	margin-top: 1em;
+	height: 50px;
 }
 
 .your-nums-ul > li {
@@ -63,10 +65,11 @@ button,
 	text-align: center;
 	border: 2px solid blue;
 	border-radius: 50%;
+	margin: 0.15em;
 	/* using min-width/-height to keep "balls" uniform circles */
 	/* however, these properties do not play well with the box model */
-	min-width: 1em;
-	min-height: 1em;
+	min-width: 1.5em;
+	min-height: 1.5em;
 }
 
 .win {
@@ -74,6 +77,7 @@ button,
 	color: fuchsia;
 	list-style-type: none;
 	margin-left: 1em;
+	height: 25px;
 }
 
 .form-special {

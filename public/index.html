@@ -2,25 +2,25 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>Workers' Playtime</title>
+		<title>Winning Big and Small</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 	</head>
 	<body>
-		<h1 class="heading">Workers' Playtime</h1>
+		<h1 class="heading">Winning Big and Small</h1>
 		<h2>You have to be in it<br />to Win it!</h2>
 
 		<h3>Your Mega Millions Numbers</h3>
 		<ul class="your-nums-ul yourMegaNums"></ul>
-		<button type="button" class="megaBtn">New Numbers</button>
+		<button type="button" class="btnMega">New Numbers</button>
 
 		<h3>Your Powerball Numbers</h3>
 		<ul class="your-nums-ul yourPowerNums"></ul>
-		<button type="button" class="powerBtn">New Numbers</button>
+		<button type="button" class="btnPower">New Numbers</button>
 
-		<h3>If you are a Big Winner:</h3>
+		<h3>Ideas if you win big:</h3>
 		<p class="win bigWin"></p>
 
-		<h3>If you are a Small Winner:</h3>
+		<h3>Ideas if you win small:</h3>
 		<p class="win smallWin"></p>
 
 		<h3>
@@ -29,20 +29,23 @@
 			set you up for random glory.
 		</h3>
 		<form
-			action="submit"
+			action="/"
+			method="post"
 			name="formspecial"
-			id="form-special"
+			id="formSpecial"
 			class="form-special"
 		>
 			<label class="form-label"
-				>Balls (30-75): <input type:"number" name="balls" value="70" min="30"
-				max="75" class="form-input form-input-num">
+				>Balls (30-75): <input type:"number" name="balls" value="70" required
+				min="30" max="75" class="form-input form-input-num formInputBalls">
 			</label>
 
 			<label class="form-label"
 				>Extra Balls (20-75): <input type:"number" name="extraBalls" value="25"
-				min="20" max="75" class="form-input form-input-num">
+				required min="20" max="75" class="form-input form-input-num
+				formInputExtraBalls">
 			</label>
+			<p class="errorNumsMessage" hidden>Use numbers between 30-75 and 20-75</p>
 			<input
 				type="submit"
 				value="Get Numbers!"
@@ -52,7 +55,7 @@
 
 		<h3>Your Special Numbers</h3>
 		<ul class="your-nums-ul yourSpecialNums"></ul>
-		<button type="button" class="specialBtn">New Specials</button>
+		<button type="button" class="btnNewSpecial">New Specials</button>
 	</body>
 	<script type="text/javascript" src="js/playtime.js"></script>
 </html>

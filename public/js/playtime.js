@@ -1,7 +1,13 @@
 let yourMegaNums = document.querySelector(".yourMegaNums");
 let yourPowerNums = document.querySelector(".yourPowerNums");
-let megaBtn = document.querySelector(".megaBtn");
-let powerBtn = document.querySelector(".powerBtn");
+let yourSpecialNums = document.querySelector(".yourSpecialNums");
+let btnMega = document.querySelector(".btnMega");
+let btnPower = document.querySelector(".btnPower");
+let formSpecial = document.querySelector("#formSpecial");
+let btnNewSpecial = document.querySelector(".btnNewSpecial");
+let formInputBalls = document.querySelector(".formInputBalls");
+let formInputExtraBalls = document.querySelector(".formInputExtraBalls");
+let errorNumsMessage = document.querySelector(".errorNumsMessage");
 let bigWin = document.querySelector(".bigWin");
 let smallWin = document.querySelector(".smallWin");
 
@@ -9,14 +15,14 @@ let smallWin = document.querySelector(".smallWin");
 let bigWinTreat = () => {
   let arr = [
     "Travel the world by camel",
-    "Hire a personal cricket bat knocker-in-er",
+    "Hire a personal cricket batsman runner",
     "Take everyone to eat at Joe's",
-    "Find inner peace through hot air balloon photography",
+    "Find inner peace with hot air balloons",
     "Climb the hill that's near Mt Everest",
     "Lease a spaceplane for family holidays",
-    "Book Daft Punk for the kids' birthday parties",
+    "Book Daft Punk for the kids' birthdays",
     "Buy your favorite animal from the zoo",
-    "Install electrified tomato cages and squirrel traps",
+    "Install electrified tomato cages and punji stick squirrel traps",
     "Plant a lobster and butter tree"
   ];
   let treatNum = () => Math.floor(Math.random() * Math.floor(arr.length));
@@ -27,7 +33,7 @@ let bigWinTreat = () => {
 
 let smallWinTreat = () => {
   let arr = [
-    "Expand your interesting grey rock collection",
+    "Expand your grey rock collection",
     "Order pizza AND wings",
     "Buy the good absinthe",
     "Party at the car wash!",
@@ -36,7 +42,7 @@ let smallWinTreat = () => {
     "Pay for dry cleaning",
     "Buy socks for most days of the week",
     "Columbia House Records subscription!",
-    "7/11 surely has lobster on those rolly things"
+    "7/11 surely has lobster on the rolly things"
   ];
   let treatNum = () => Math.floor(Math.random() * Math.floor(arr.length));
   let text = document.createTextNode(arr[treatNum()]);
@@ -49,6 +55,7 @@ smallWinTreat();
 
 //# Function returns 6 random numbers and injects them into DOM
 let yourRandNums = e => {
+  e.preventDefault();
   let mainBallMax;
   let extraBallMax;
   let text;
@@ -56,16 +63,26 @@ let yourRandNums = e => {
   //* MegaMillions: 1-70 main balls and 1-25 mega balls
   //* PowerBall: 1-69 main balls and 1-26 power balls
   //* Remove yourMegNums or yourPowerNums child nodes
-  if (e.target === megaBtn) {
+  if (e.target === btnMega) {
     mainBallMax = 70;
     extraBallMax = 25;
     while (yourMegaNums.firstChild)
       yourMegaNums.removeChild(yourMegaNums.firstChild);
-  } else if (e.target === powerBtn) {
+  } else if (e.target === btnPower) {
     mainBallMax = 69;
     extraBallMax = 26;
     while (yourPowerNums.firstChild)
       yourPowerNums.removeChild(yourPowerNums.firstChild);
+  } else if (e.target === formSpecial) {
+    mainBallMax = formInputBalls.value;
+    extraBallMax = formInputExtraBalls.value;
+    while (yourSpecialNums.firstChild)
+      yourSpecialNums.removeChild(yourSpecialNums.firstChild);
+  } else if (e.target === btnNewSpecial) {
+    mainBallMax = formInputBalls.value;
+    extraBallMax = formInputExtraBalls.value;
+    while (yourSpecialNums.firstChild)
+      yourSpecialNums.removeChild(yourSpecialNums.firstChild);
   } else {
     console.log("Lottery not specified.");
   }
@@ -88,26 +105,38 @@ let yourRandNums = e => {
     li = document.createElement("li");
     li.appendChild(text);
     //* append nodes to either Mega Millions or Powerball <ul>
-    e.target === megaBtn
+    e.target === btnMega
       ? yourMegaNums.appendChild(li)
-      : yourPowerNums.appendChild(li);
+      : e.target === btnPower
+      ? yourPowerNums.appendChild(li)
+      : yourSpecialNums.appendChild(li);
   }
   let extraBall = Math.floor(Math.random() * Math.floor(extraBallMax) + 1);
   text = document.createTextNode(`${extraBall}`);
   li = document.createElement("li");
   li.appendChild(text);
   //* append nodes to either Mega Millions or Powerball <ul>
-  e.target === megaBtn
+  e.target === btnMega
     ? yourMegaNums.appendChild(li)
-    : yourPowerNums.appendChild(li);
+    : e.target === btnPower
+    ? yourPowerNums.appendChild(li)
+    : yourSpecialNums.appendChild(li);
   bigWinTreat();
   smallWinTreat();
 };
 
+//# Return error message if user provided invalid numbers in form inputs
+let errorNums = () => {
+  errorNumsMessage.removeAttribute("hidden");
+};
+
 //# Call youRandNums with lottery parameters
 // window.addEventListener(onload, yourRandNums(event));
-megaBtn.addEventListener("click", yourRandNums);
-powerBtn.addEventListener("click", yourRandNums);
+btnMega.addEventListener("click", yourRandNums);
+btnPower.addEventListener("click", yourRandNums);
+formSpecial.onsubmit = yourRandNums;
+formInputBalls.oninvalid = errorNums;
+btnNewSpecial.addEventListener("click", yourRandNums);
 
 //# Better Comments Key
 //# Label: (which I custom added to settings.json)
