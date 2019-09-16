@@ -4,10 +4,11 @@ let yourSpecialNums = document.querySelector(".yourSpecialNums");
 let btnMega = document.querySelector(".btnMega");
 let btnPower = document.querySelector(".btnPower");
 let formSpecial = document.querySelector("#formSpecial");
-let btnNewSpecial = document.querySelector(".btnNewSpecial");
-let formInputMainBalls = document.querySelector(".formInputMainBalls");
-let formInputExtraBalls = document.querySelector(".formInputExtraBalls");
-let errorNumsMessage = document.querySelector(".errorNumsMessage");
+let btnSpecials = document.querySelector(".btnSpecials");
+let btnNewSpecials = document.querySelector(".btnNewSpecials");
+let formInputMainHigh = document.querySelector("#formInputMainHigh");
+let formInputExtraHigh = document.querySelector("#formInputExtraHigh");
+// let errorNumsMessage = document.querySelector(".errorNumsMessage");
 let bigWin = document.querySelector(".bigWin");
 let smallWin = document.querySelector(".smallWin");
 
@@ -73,12 +74,13 @@ let yourRandNums = e => {
     extraBallMax = 26;
     while (yourPowerNums.firstChild)
       yourPowerNums.removeChild(yourPowerNums.firstChild);
-  } else if (e.target === formSpecial) {
+  } else if (e.target === formSpecial || e.target === btnSpecials) {
+    // * Use one or the other above depending on using form's input or button
     mainBallMax = formInputMainHigh.value;
     extraBallMax = formInputExtraHigh.value;
     while (yourSpecialNums.firstChild)
       yourSpecialNums.removeChild(yourSpecialNums.firstChild);
-  } else if (e.target === btnNewSpecial) {
+  } else if (e.target === btnNewSpecials) {
     mainBallMax = formInputMainHigh.value;
     extraBallMax = formInputExtraHigh.value;
     while (yourSpecialNums.firstChild)
@@ -135,9 +137,10 @@ let yourRandNums = e => {
 // window.addEventListener(onload, yourRandNums(event));
 btnMega.addEventListener("click", yourRandNums);
 btnPower.addEventListener("click", yourRandNums);
+btnSpecials.addEventListener("click", yourRandNums);
 formSpecial.onsubmit = yourRandNums;
 // formInputMainBalls.oninvalid = errorNums;
-btnNewSpecial.addEventListener("click", yourRandNums);
+btnNewSpecials.addEventListener("click", yourRandNums);
 
 //# Better Comments Key
 //# Label: (which I custom added to settings.json)
