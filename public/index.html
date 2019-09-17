@@ -24,8 +24,8 @@
 		<p class="win smallWin"></p>
 
 		<h3>
-			Need some special numbers for another lottery? Provide us with details,
-			and we will set you up for random glory.
+			Need some special numbers for another lottery? Provide the lottery's
+			details for random glory.
 			<small><a class="small-print" href="#examples">Examples.</a></small>
 		</h3>
 
@@ -37,25 +37,60 @@
 			class="form-special"
 		>
 			<label class="form-label"
-				>Main Balls (1-6): <input type:"number" name="mainBalls" value="5"
-				required min="1" max="6" id="formInputMainBalls" class="form-input
-				form-input-num">
-				<br />
-				Main Balls High Number (30-75): <input type:"number" name="mainHigh"
-				value="70" required min="30" max="75" id="formInputMainHigh"
-				class="form-input form-input-num">
+				>Main Balls (1-6):
+				<input
+					type="number"
+					name="mainBalls"
+					value="5"
+					required
+					min="1"
+					max="6"
+					id="formInputMainBalls"
+					class="form-input
+				form-input-num"
+				/>
 			</label>
-
 			<label class="form-label"
-				>Extra Balls (0-2): <input type:"number" name="extraBalls" value="1"
-				required min="0" max="2" id="formInputExtraBalls" class="form-input
-				form-input-num">
-				<br />
-				Extra Balls High Number (0-45): <input type:"number" name="extraHigh"
-				value="25" required min="10" max="45" id="formInputExtraHigh"
-				class="form-input form-input-num">
+				>Main Balls High Number (30-75):
+				<input
+					type="number"
+					name="mainHigh"
+					value="70"
+					required
+					min="30"
+					max="75"
+					id="formInputMainHigh"
+					class="form-input form-input-num"
+				/>
 			</label>
-			<p class="errorNumsMessage" hidden>See valid numbers in parentheses</p>
+			<label class="form-label"
+				>Extra Balls (0-2):
+				<input
+					type="number"
+					name="extraBalls"
+					value="1"
+					required
+					min="0"
+					max="2"
+					id="formInputExtraBalls"
+					class="form-input
+				form-input-num"
+				/>
+			</label>
+			<label class="form-label"
+				>Extra Balls High Number (0-45):
+				<input
+					type="number"
+					name="extraHigh"
+					value="25"
+					required
+					min="10"
+					max="45"
+					id="formInputExtraHigh"
+					class="form-input form-input-num"
+				/>
+			</label>
+			<!-- <p class="errorNumsMessage" hidden>See valid numbers in parentheses</p> -->
 			<button type="button" class="btnSpecials">Get Numbers</button>
 			<!-- <input
 				type="submit"
@@ -71,6 +106,7 @@
 		<h6 id="examples">
 			Example 1: Euromillions has 5 main numbers (1-50) and 2 Lucky Stars
 			(1-12). Enter 5 and 50 for main balls, and 2 and 12 for extras.
+			<br />
 			<br />
 			Example 2: The UK's Lotto has 6 main numbers (1-59) and no extra numbers.
 			Enter 6 and 59 for main balls, and 0 and 0 for extras.

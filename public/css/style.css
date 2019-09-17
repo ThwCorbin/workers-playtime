@@ -2,6 +2,7 @@ html {
 	display: flex;
 	flex-direction: column;
 }
+
 body {
 	display: flex;
 	flex-direction: column;
@@ -60,7 +61,7 @@ button,
 
 button:focus,
 button:hover,
-botton:active,
+button:active,
 .form-input-submit:focus,
 .form-input-submit:hover,
 .form-input-submit:active {
@@ -80,8 +81,9 @@ botton:active,
 	color: crimson;
 	text-align: center;
 	border: 2px solid darkslateblue;
-	background: cadetblue;
+	background: #a6caca;
 	border-radius: 50%;
+	box-shadow: 2px 3px 3px gray;
 	margin: 0.15em;
 	/* using min-width/-height to keep "balls" uniform circles */
 	/* however, these properties do not play well with the box model */
@@ -110,8 +112,8 @@ botton:active,
 }
 
 .form-input-num {
-	font-size: 1.3em;
-	color: crimson;
+	font-size: 1.1em;
+	color: #03767a;
 	border: none;
 	width: 2em;
 }

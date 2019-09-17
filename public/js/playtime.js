@@ -15,10 +15,10 @@ let smallWin = document.querySelector(".smallWin");
 //# Pick random ideas if we win big or small
 let bigWinIdeas = () => {
   let arr = [
-    "Travel the world by camel",
+    "Travel around the world by camel",
     "Hire a personal cricket batsman runner",
-    "Take everyone to eat at Joe's",
-    "Find inner peace with hot air balloons",
+    "Build a space elevator for easy access to your getaway moon base home",
+    "Find inner peace racing hot air balloons",
     "Climb the hill that's near Mt Everest",
     "Lease a spaceplane for family holidays",
     "Book Daft Punk for the kids' birthdays",
