@@ -4,6 +4,15 @@
 //* Highlight: This is worth mentioning (I added //# to settings.json)
 ////Stike: this code from the Akashic Records
 //todo: unite for playtime
+//------------------------
+
+//# Things to do
+//todo: refactor to remove console.log("No true Extra")
+//todo: fix your special numbers 8 balls spilling over on small screens
+//todo: error validation for form numbers
+//todo: consider removing New Specials button and functionality
+//todo: babel-eslint parser issue
+//todo: changes for bigger screens
 
 //# Variables
 //* Lottery ball display variables
