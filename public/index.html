@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- error: consider using babel-eslint parser -->
 <html>
 	<head>
 		<meta charset="utf-8" />
@@ -37,13 +38,13 @@
 			class="form-special"
 		>
 			<label class="form-label"
-				>Main Balls (1-6):
+				>Main Balls (5-6):
 				<input
 					type="number"
 					name="mainBalls"
 					value="5"
 					required
-					min="1"
+					min="5"
 					max="6"
 					id="formInputMainBalls"
 					class="form-input
@@ -92,11 +93,6 @@
 			</label>
 			<!-- <p class="errorNumsMessage" hidden>See valid numbers in parentheses</p> -->
 			<button type="button" class="btnSpecials">Get Numbers</button>
-			<!-- <input
-				type="submit"
-				value="Get Numbers"
-				class="form-input form-input-submit"
-			/> -->
 		</form>
 
 		<h3>Your Special Numbers</h3>

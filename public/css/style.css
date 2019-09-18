@@ -78,9 +78,9 @@ button:active,
 
 .your-nums-ul > li {
 	font-size: 1.5em;
-	color: crimson;
+	color: #dc143c;
 	text-align: center;
-	border: 2px solid darkslateblue;
+	border: 2px solid #483d8b;
 	background: #a6caca;
 	border-radius: 50%;
 	box-shadow: 2px 3px 3px gray;
@@ -90,6 +90,11 @@ button:active,
 	min-width: 1.5em;
 	min-height: 1.5em;
 }
+
+/* .li-extra-ball {
+	color: darkslateblue;
+	border-color: crimson;
+} */
 
 .win {
 	font-size: 1.1em;
