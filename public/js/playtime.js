@@ -1,4 +1,12 @@
-//* Ball display variables
+//# Label/Description: Better Comments Key
+//! Warning: My cat and dog are sleeping
+//? Question: for ya'll
+//* Highlight: This is worth mentioning (I added //# to settings.json)
+////Stike: this code from the Akashic Records
+//todo: unite for playtime
+
+//# Variables
+//* Lottery ball display variables
 let yourMegaNums = document.querySelector(".yourMegaNums");
 let yourPowerNums = document.querySelector(".yourPowerNums");
 let yourSpecialNums = document.querySelector(".yourSpecialNums");
@@ -132,13 +140,6 @@ let buildNodes = (ball, target, extra) => {
     : console.log("No true extra");
 };
 
-// yourPowerNums.lastChild.setAttribute("class", "li-extra-ball");
-// yourSpecialNums.lastChild.setAttribute("class", "li-extra-ball");
-// ? yourMegaNums.li.parentNode
-// : target === btnPower
-// ? yourPowerNums.appendChild(li)
-// : yourSpecialNums.appendChild(li);
-
 //# Generate and inject balls into DOM
 let generateBalls = arr => {
   let [target, mainBallNum, mainBallMax, extraBallNum, extraBallMax] = arr;
@@ -187,13 +188,6 @@ let yourRandNums = e => {
   //* Then generate the main and extra balls and inject into DOM
   generateBalls(ballsNumsMaxs(target));
 
-  // //* Generate 5 (or 6) numbered balls and inject each one into DOM
-  // generateMainBalls(e, mainBallNum, mainBallMax);
-
-  // //* Generate 1 (or 2) numbered ball and inject into DOM
-  // //* Does nothing if extraBallNum === 0
-  // generateExtraBalls(e, extraBallNum, extraBallMax);
-
   //* Refresh winning ideas
   bigWinIdeas();
   smallWinIdeas();
@@ -212,11 +206,3 @@ btnSpecials.addEventListener("click", yourRandNums);
 btnNewSpecials.addEventListener("click", yourRandNums);
 mainBalls.oninvalid = errorNums;
 extraBalls.oninvalid = errorNums;
-
-//# Better Comments Key
-//# Label: (which I custom added to settings.json)
-//! Warning: My cat and dog are dangerous sleepers
-//? Question: for ya'll
-//* Highlight: This is worth mentioning
-////Stike: this code from the Akashic Records
-//todo: unite for playtime
