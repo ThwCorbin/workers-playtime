@@ -91,11 +91,6 @@ button:active,
 	min-height: 1.5em;
 }
 
-/* .li-extra-ball {
-	color: darkslateblue;
-	border-color: crimson;
-} */
-
 .win {
 	font-size: 1.1em;
 	color: crimson;
