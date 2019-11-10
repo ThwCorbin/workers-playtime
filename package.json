@@ -1,24 +1,47 @@
 {
-	"name": "workers-playtime",
-	"version": "1.0.0",
-	"description": "",
-	"main": "playtime.js",
-	"engines": {
-		"node": ">=8.10.0"
-	},
-	"dependencies": {
-		"nunjucks": "^3.2.0"
-	},
-	"devDependencies": {
-		"eslint": "^6.3.0",
-		"eslint-config-prettier": "^6.3.0",
-		"eslint-plugin-node": "^10.0.0",
-		"eslint-plugin-prettier": "^3.1.0",
-		"prettier": "1.18.2"
-	},
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"author": "",
-	"license": "ISC"
+  "name": "workers-playtime",
+  "description": "Tom's play area",
+  "version": "1.0.0",
+  "author": "Tom Corbin",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ThwCorbin/workers-playtime"
+  },
+  "main": "dist/bundle.js",
+  "engines": {
+    "node": ">=8.10.0"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c && npx @11ty/eleventy --serve",
+    "serve": "npx @11ty/eleventy --serve",
+    "clean": "rimraf dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "playtime",
+    "JavaScript",
+    "HTML",
+    "CSS"
+  ],
+  "dependencies": {
+    "nunjucks": "^3.2.0"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^0.9.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^2.0.3",
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/node": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/register": "^7.7.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "prettier": "1.19.1"
+  }
 }

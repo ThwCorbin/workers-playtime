@@ -1,12 +1,11 @@
-//# Label/Description: Better Comments Key
-//! Warning: My cat and dog are sleeping
-//? Question: for ya'll
-//* Highlight: This is worth mentioning (I added //# to settings.json)
-////Stike: this code from the Akashic Records
-//todo: unite for playtime
-//------------------------
+//> Label: Better Comments Key (Add > style to VS Code settings.json)
+//! Warning: A Palantir is a dangerous tool, Saruman.
+//? Question: Why? Why should we fear to use it?
+//* Highlight: They are not all accounted for, the lost Seeing Stones.
+//// Strike - Friendship with Saruman is not lightly thrown aside!
+//todo: Leap off the Tower of Orthanc on to a giant eagle
 
-//# Things to do
+//> Things to do
 //todo: refactor to remove console.log("No true Extra")
 //todo: fix your special numbers 8 balls spilling over on small screens
 //todo: error validation for form numbers
@@ -14,7 +13,7 @@
 //todo: babel-eslint parser issue
 //todo: changes for bigger screens
 
-//# Variables
+//> Variables
 //* Lottery ball display variables
 let yourMegaNums = document.querySelector(".yourMegaNums");
 let yourPowerNums = document.querySelector(".yourPowerNums");
@@ -39,7 +38,7 @@ let smallWin = document.querySelector(".smallWin");
 //* Other variables
 let errorNumsMessage = document.querySelector(".errorNumsMessage");
 
-//# Return random ideas if we win big
+//> Return random ideas if we win big
 let bigWinIdeas = () => {
   let arr = [
     "Travel around the world by camel",
@@ -60,7 +59,7 @@ let bigWinIdeas = () => {
 };
 bigWinIdeas();
 
-//# Return random ideas if we win small
+//> Return random ideas if we win small
 let smallWinIdeas = () => {
   let arr = [
     "Expand your grey rock collection",
@@ -81,8 +80,8 @@ let smallWinIdeas = () => {
 };
 smallWinIdeas();
 
-//# Return the number of balls to draw and the maximum/highest ball number
-//# Prepare DOM to accept new series of balls (avoid concat with last series)
+//> Return the number of balls to draw and the maximum/highest ball number
+//> Prepare DOM to accept new series of balls (avoid concat with last series)
 let ballsNumsMaxs = target => {
   //* Default values MegaMillions: 5 main balls (1-70) + 1 mega ball (1-25)
   //? Use "strings" or numbers?
@@ -117,12 +116,12 @@ let ballsNumsMaxs = target => {
   return [target, mainBallNum, mainBallMax, extraBallNum, extraBallMax];
 };
 
-//# Return a random ball numbered between 1 and ballMax (e.g. 1-70)
+//> Return a random ball numbered between 1 and ballMax (e.g. 1-70)
 let ballNumber = ballMax => {
   return Math.floor(Math.random() * Math.floor(ballMax) + 1);
 };
 
-//# Build nodes and append to <ul> && styly extra balls
+//> Build nodes and append to <ul> && styly extra balls
 let buildNodes = (ball, target, extra) => {
   let text = document.createTextNode(`${ball}`);
   let li = document.createElement("li");
@@ -149,7 +148,7 @@ let buildNodes = (ball, target, extra) => {
     : console.log("No true extra");
 };
 
-//# Generate and inject balls into DOM
+//> Generate and inject balls into DOM
 let generateBalls = arr => {
   let [target, mainBallNum, mainBallMax, extraBallNum, extraBallMax] = arr;
   let ball = null;
@@ -188,7 +187,7 @@ let generateBalls = arr => {
   }
 };
 
-//# Return random numbers and inject them into DOM
+//> Return random numbers and inject them into DOM
 let yourRandNums = e => {
   e.preventDefault();
   let target = e.target;
@@ -203,12 +202,12 @@ let yourRandNums = e => {
 };
 
 // todo form validation for numbers
-//# Return error message if user provided invalid numbers in form inputs
+//> Return error message if user provided invalid numbers in form inputs
 let errorNums = () => {
   errorNumsMessage.removeAttribute("hidden");
 };
 
-//# Call yourRandNums()
+//> Call yourRandNums()
 btnMega.addEventListener("click", yourRandNums);
 btnPower.addEventListener("click", yourRandNums);
 btnSpecials.addEventListener("click", yourRandNums);
