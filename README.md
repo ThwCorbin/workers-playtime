@@ -1,15 +1,17 @@
-# Project
+# Worker's Playtime
+
+## Project
 
 A play area to try out code.
 
-# Brief
+## Brief
 
 User can move along. Nothing to see here.
 
-# Background
+## Background
 
 I needed a play area to try out code using a JAMstack.
 
-# Status
+## Status
 
 In the factory canteen.
