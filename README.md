@@ -1,7 +1,15 @@
-Project: A play area to try out code.
+# Project
 
-Brief: User can move along. Nothing to see here.
+A play area to try out code.
 
-Background: I needed a play area to try out code using a JAMstack.
+# Brief
 
-Status: In the factory canteen.
+User can move along. Nothing to see here.
+
+# Background
+
+I needed a play area to try out code using a JAMstack.
+
+# Status
+
+In the factory canteen.
