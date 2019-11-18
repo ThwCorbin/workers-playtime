@@ -25,4 +25,7 @@ $ git clone https://github.com/ThwCorbin/workers-playtime
 $ cd workers-playtime
 $ npm install
 $ npm run build
+
+// Access local URL: http://localhost:8080
+// [Browsersync] Serving files from: dist
 ```
