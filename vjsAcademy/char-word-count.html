@@ -37,7 +37,9 @@
         let charCount = document.querySelector("#character-count");
 
         text.addEventListener("input", (e) => {
-            wordCount.textContent = e.target.value.split(" ")
+            // Create an array of words, remove whitespace, and filter out non-words
+            wordCount.textContent = e.target.value.replace(/(\r\n|\n|\r)/gm, " ")
+                .split(" ")
                 .filter((word) => word !== "")
                 .length;
             charCount.textContent = e.target.textLength;
