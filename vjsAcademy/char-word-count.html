@@ -35,13 +35,16 @@
         let text = document.querySelector("#text");
         let wordCount = document.querySelector("#word-count");
         let charCount = document.querySelector("#character-count");
-
+        
+        // Update word and character counts for textarea when user adds content
         text.addEventListener("input", (e) => {
-            // Create an array of words, remove whitespace, and filter out non-words
+            // Remove line breaks, create an array of words, remove empty strings
+            // Set wordCount to word array length
             wordCount.textContent = e.target.value.replace(/(\r\n|\n|\r)/gm, " ")
                 .split(" ")
                 .filter((word) => word !== "")
                 .length;
+            // Set charCount to text length
             charCount.textContent = e.target.textLength;
         });
 	</script>
