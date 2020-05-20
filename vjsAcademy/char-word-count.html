@@ -38,15 +38,22 @@
         
         // Update word and character counts for textarea when user adds content
         text.addEventListener("input", (e) => {
-            // Remove line breaks, create an array of words, remove empty strings
+            // Split text on whitespace to create an array of words
+            // Remove empty strings
             // Set wordCount to word array length
-            wordCount.textContent = e.target.value.replace(/(\r\n|\n|\r)/gm, " ")
-                .split(" ")
-                .filter((word) => word !== "")
+            wordCount.textContent = e.target.value
+                .split(/\s+/)
+                .filter((word) => word.length > 0)
                 .length;
             // Set charCount to text length
             charCount.textContent = e.target.textLength;
         });
+
+        // My previous solution
+            // wordCount.textContent = e.target.value.replace(/(\r\n|\n|\r)/gm, " ")
+            //     .split(" ")
+            //     .filter((word) => word !== "")
+            //     .length;
 	</script>
 </body>
 </html>
