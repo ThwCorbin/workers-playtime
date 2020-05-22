@@ -1,62 +1,63 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Character Count</title>
+  <head>
+    <title>Character Count</title>
 
-	<style type="text/css">
-		body {
-			margin: 1em auto;
-			max-width: 40em;
-			width: 88%;
-		}
+    <style type="text/css">
+      body {
+        margin: 1em auto;
+        max-width: 40em;
+        width: 88%;
+      }
 
-		label {
-			display: block;
-			width: 100%;
-		}
+      label {
+        display: block;
+        width: 100%;
+      }
 
-		textarea {
-			min-height: 24em;
-			width: 100%;
-		}
-	</style>
-</head>
-<body>
-
+      textarea {
+        min-height: 24em;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
     <!-- Alternate simpler solution after reviewing solution video -->
     <h1>Character Count</h1>
     <label for="text">Enter your text below.</label>
     <textarea id="text"></textarea>
-    
-    <p id="statusSentence" aria-live="polite">You've written 0 words and 0 characters.</p>
-    
+
+    <p id="statusSentence" aria-live="polite">
+      You've written 0 words and 0 characters.
+    </p>
+
     <script>
-        let text = document.querySelector("#text");
-        let statusSentence = document.querySelector("#statusSentence");
-            
-        // Update word and character counts for textarea when user adds content
-        text.addEventListener("input", (e) => {
-            // Split text on whitespace to create an array of words
-            // Remove empty strings
-            // Set wordCount to word array length
-            let wordCount = e.target.value
-                .split(/\s+/)
-                .filter((word) => word.length > 0)
-                .length;
-                
-            // Set charCount to text length
-            let charCount = e.target.textLength;
-                
-            // Update status sentence for screen reader
-            return statusSentence.textContent = 
-            `You've written ${wordCount} ${wordCount === 1 ? "word" : "words"} and ${charCount} ${charCount === 1 ? "character" : "characters"}. And that is coolio!`
-        });
+      let text = document.querySelector("#text");
+      let statusSentence = document.querySelector("#statusSentence");
+
+      // Update word and character counts for textarea when user adds content
+      text.addEventListener("input", (e) => {
+        // Split text on whitespace to create an array of words
+        // Remove empty strings
+        // Set wordCount to word array length
+        let wordCount = e.target.value
+          .split(/\s+/)
+          .filter((word) => word.length > 0).length;
+
+        // Set charCount to text length
+        let charCount = e.target.textLength;
+
+        // Update status sentence for screen reader
+        return (statusSentence.textContent = `You've written ${wordCount} ${
+          wordCount === 1 ? "word" : "words"
+        } and ${charCount} ${
+          charCount === 1 ? "character" : "characters"
+        }. And that is coolio!`);
+      });
     </script>
 
-
-
-<!-- SEE ALTERNATE SIMPLER SOLUTION ABOVE -->
-	<!-- <h1>Character Count</h1>
+    <!-- SEE ALTERNATE SIMPLER SOLUTION ABOVE -->
+    <!-- <h1>Character Count</h1>
 
 	<label for="text">Enter your text below.</label>
 	<textarea id="text"></textarea>
@@ -66,7 +67,7 @@
         <strong><span id="character-count">0</span> characters</strong>.
     </p> -->
 
-	<!-- <script>
+    <!-- <script>
         let text = document.querySelector("#text");
         let wordCount = document.querySelector("#word-count");
         let charCount = document.querySelector("#character-count");
@@ -89,6 +90,5 @@
             return statusSentence.textContent = 
                 `You've written ${wordCount} ${wordCount === 1 ? "word" : "words"} and ${charCount} ${charCount === 1 ? "character" : "characters"}. And that is coolio!`
     </script>  -->
-
-</body>
+  </body>
 </html>
