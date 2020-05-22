@@ -44,12 +44,12 @@
                 .filter((word) => word.length > 0)
                 .length;
                 
-                // Set charCount to text length
-                let charCount = e.target.textLength;
+            // Set charCount to text length
+            let charCount = e.target.textLength;
                 
-                // Update status sentence for screen reader
-                return statusSentence.textContent = 
-                    `You've written ${wordCount} ${wordCount === 1 ? "word" : "words"} and ${charCount} ${charCount === 1 ? "character" : "characters"}. And that is coolio!`
+            // Update status sentence for screen reader
+            return statusSentence.textContent = 
+            `You've written ${wordCount} ${wordCount === 1 ? "word" : "words"} and ${charCount} ${charCount === 1 ? "character" : "characters"}. And that is coolio!`
         });
     </script>
 
