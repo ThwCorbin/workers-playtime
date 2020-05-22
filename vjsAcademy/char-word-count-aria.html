@@ -28,7 +28,7 @@
 	<label for="text">Enter your text below.</label>
 	<textarea id="text"></textarea>
     
-    <p role="status" aria-live="polite">
+    <p id="statusSentence" role="status" aria-live="polite">
         You've written <strong><span id="word-count">0</span> words</strong> and 
         <strong><span id="character-count">0</span> characters</strong>.
     </p>
@@ -37,25 +37,29 @@
         let text = document.querySelector("#text");
         let wordCount = document.querySelector("#word-count");
         let charCount = document.querySelector("#character-count");
+        let statusSentence = document.querySelector("#statusSentence");
         
         // Update word and character counts for textarea when user adds content
         text.addEventListener("input", (e) => {
             // Split text on whitespace to create an array of words
             // Remove empty strings
             // Set wordCount to word array length
-            wordCount.textContent = e.target.value
-                .split(/\s+/)
-                .filter((word) => word.length > 0)
-                .length;
+            wordCount = e.target.value
+            .split(/\s+/)
+            .filter((word) => word.length > 0)
+            .length;
+            
             // Set charCount to text length
-            charCount.textContent = e.target.textLength;
+            charCount = e.target.textLength;
+            
+            // Update status sentence for screen reader
+            return statusSentence.textContent = 
+                `You've written ${wordCount} ${wordCount === 1 ? "word" : "words"} and ${charCount} characters. And that is coolio!`
+            
+            // How do I maintian the <strong> elements?
+            // return statusSentence.innerHTML = 
+            //     `You've written <strong><span id="word-count">${wordCount}</span> words </strong>and <strong><span id="character-count">${charCount}</span> characters</strong>. And that is coolio!`
         });
-
-        // My previous solution
-            // wordCount.textContent = e.target.value.replace(/(\r\n|\n|\r)/gm, " ")
-            //     .split(" ")
-            //     .filter((word) => word !== "")
-            //     .length;
 	</script>
 </body>
 </html>
