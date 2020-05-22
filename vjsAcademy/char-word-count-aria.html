@@ -54,7 +54,7 @@
             
             // Update status sentence for screen reader
             return statusSentence.textContent = 
-                `You've written ${wordCount} ${wordCount === 1 ? "word" : "words"} and ${charCount} characters. And that is coolio!`
+                `You've written ${wordCount} ${wordCount === 1 ? "word" : "words"} and ${charCount} ${charCount === 1 ? "character" : "characters"}. And that is coolio!`
             
             // How do I maintian the <strong> elements?
             // return statusSentence.innerHTML = 
