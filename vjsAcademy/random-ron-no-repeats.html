@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Random Ron Swanson Quotes</title>
+
+    <style type="text/css">
+      body {
+        margin: 1em auto;
+        max-width: 40em;
+        width: 88%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Random Ron Swanson Quotes</h1>
+
+    <blockquote id="ronQuote" aria-live="polite"></blockquote>
+
+    <p>
+      <button id="btnRon">More Ron</button>
+    </p>
+
+    <script>
+      let ronQuote = document.querySelector("#ronQuote");
+      let btnRon = document.querySelector("#btnRon");
+      let ronQuotesArr = [];
+
+      let updateRonArray = (quote) => {
+        // If the array has fifty quotes, remove the first quote
+        if(ronQuotesArr.length === 50) ronQuotesArr.shift();
+        // Add the quote to the end of the array
+        ronQuotesArr.push(quote);
+      };
+
+      let newRonQuote = () => {
+        let quote = "";
+        // Fetch a quote
+        fetch("http://ron-swanson-quotes.herokuapp.com/v2/quotes")
+          .then((response) =>
+            response.ok ? response.json() : Promise.reject(response)
+          )
+          .then((data) => quote = data[0])
+          .then(() => {
+              // if array already includes the quote, fetch another quote
+              if(ronQuotesArr.includes(quote)) {
+                console.log(`This quote is a duplicate: ${quote}`)
+                newRonQuote();
+              }
+            })
+          .then(() => ronQuote.textContent = quote)
+          .then(() => updateRonArray(quote))
+          .catch((err) => console.warn(`Error: ${err.statusText}`));
+      };
+
+      btnRon.addEventListener("click", newRonQuote);
+      window.addEventListener("load", newRonQuote);
+    </script>
+  </body>
+</html>
