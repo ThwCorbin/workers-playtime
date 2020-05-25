@@ -43,12 +43,15 @@
           .then(() => {
               // if array already includes the quote, fetch another quote
               if(ronQuotesArr.includes(quote)) {
-                console.log(`This quote is a duplicate: ${quote}`)
+                console.log(`This quote is a duplicate: ${quote}`);
                 newRonQuote();
+              } else {
+                updateRonArray(quote);
+                ronQuote.textContent = quote;
               }
             })
-          .then(() => ronQuote.textContent = quote)
-          .then(() => updateRonArray(quote))
+        //   .then(() => ronQuote.textContent = quote)
+        //   .then(() => updateRonArray(quote))
           .catch((err) => console.warn(`Error: ${err.statusText}`));
       };
 
