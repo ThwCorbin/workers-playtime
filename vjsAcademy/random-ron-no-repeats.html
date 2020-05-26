@@ -33,25 +33,22 @@
       };
 
       let newRonQuote = () => {
-        let quote = "";
         // Fetch a quote
         fetch("http://ron-swanson-quotes.herokuapp.com/v2/quotes")
           .then((response) =>
             response.ok ? response.json() : Promise.reject(response)
           )
-          .then((data) => quote = data[0])
-          .then(() => {
+          .then((data) => {
+              let quote = data[0];
               // if array already includes the quote, fetch another quote
               if(ronQuotesArr.includes(quote)) {
-                console.log(`This quote is a duplicate: ${quote}`);
                 newRonQuote();
+                return;
               } else {
                 updateRonArray(quote);
                 ronQuote.textContent = quote;
               }
             })
-        //   .then(() => ronQuote.textContent = quote)
-        //   .then(() => updateRonArray(quote))
           .catch((err) => console.warn(`Error: ${err.statusText}`));
       };
 
