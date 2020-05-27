@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>What to read today</title>
+
+	<style type="text/css">
+		body {
+			margin: 1em auto;
+			max-width: 40em;
+			width: 88%;
+		}
+	</style>
+</head>
+<body>
+
+	<h1>What to read today</h1>
+
+	<div id="app"></div>
+
+	<script>
+    let app = document.querySelector("#app");
+    let url = "https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=YG2X64hbcN9M1aIxxIwGx3GQLIOhecpr";
+
+    let getArticles = () => {
+      fetch(url)
+      .then((response) =>
+        response.ok ? response.json() : Promise.reject(response)
+      )
+      .then((data) => {
+        console.log(data.results.slice(0, 10));
+        let articles = data.results.slice(0, 10);
+        let titles = articles.forEach(article => {
+           `<li>${ }</li>`
+        };
+        app.innerHTML =
+      })
+      .catch((err) => console.warn(`Error: ${err.statusText}`));
+
+    };
+
+    window.addEventListener("load", getArticles);
+
+	</script>
+</body>
+</html>
