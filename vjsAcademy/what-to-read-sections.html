@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NYT Arts Section Today</title>
+  <style type="text/css">
+    body {
+      margin: .5em auto;
+      max-width: 40em;
+      width: 88%;
+      text-align: center;
+    }
+
+    ul {
+      list-style: none;
+      text-align: left;
+    }
+
+    li {
+      padding: .5em .1em;
+    }
+
+    a {
+      font-size: 1.25em;
+    }
+  </style>
+</head>
+<body>
+  <h1>The New York Times</br><span id="section">Sports</span></br>Top Ten Stories</h1>
+  
+  <nav>
+    <ul id="navSections">
+      <li>Home</li>
+      <li>World</li>
+      <li>US</li>
+      <li>Sports</li>
+      <li>More</li>
+    </ul>
+  </nav>
+
+  <div id="app">
+    <a href="https://www.nytimes.com/section/sports">The New York Times: Arts</a>
+  </div>
+
+  <script>
+    let app = document.querySelector("#app");
+    let sectionTitle = document.querySelector("#section");
+
+    let changeSection = section => sectionTitle.textContent = section;
+
+    let getUrl = () => {
+
+      let apiKey = `YG2X64hbcN9M1aIxxIwGx3GQLIOhecpr`;
+      let sections = ["arts", "automobiles", "books", "business", "fashion", "food",
+                   "health", "home", "insider", "magazine", "movies", "nyregion",
+                   "obituaries", "opinion", "politics", "realestate", "science",
+                   "sports", "sundayreview", "technology", "theater", "t-magazine",
+                   "travel", "upshot", "us", "world"];
+      let url = `https://api.nytimes.com/svc/topstories/v2/${sections[17]}.json?api-key=${apiKey}`;
+
+      changeSection()
+      return url;
+    };
+
+    let getArticles = () => {
+      // Fetch articles from API
+      fetch(getUrl())
+      .then((response) =>
+        response.ok ? response.json() : Promise.reject(response)
+      )
+      .then((data) => {
+        // Assign first ten article objects to a variable
+        let articles = data.results.slice(0, 10);
+        let listItems = " ";
+        // Build list items string
+        articles.forEach(article => {
+          listItems += `<li><a href="${article.url}">${article.title}</a></li>`
+        });
+        // Update DOM with a list of articles
+        app.innerHTML = `<ul>${listItems}</ul>`;
+      })
+      .catch((err) => console.warn(`Error: ${err.statusText}`));
+
+    };
+
+    window.addEventListener("load", getArticles);
+
+  </script>
+</body>
+</html>
