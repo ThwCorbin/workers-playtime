@@ -45,9 +45,9 @@
         let articles = data.results.slice(0, 10);
         let listItems = " ";
         // Build list items string
-        articles.map(article => {
+        articles.forEach(article => {
           listItems += `<li><a href="${article.url}">${article.title}</a></li>`
-        }).join(" ");
+        });
         // Update DOM with a list of articles
         app.innerHTML = `<ul>${listItems}</ul>`;
       })
