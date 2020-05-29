@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NYT Favorite Sections</title>
+
+    <style type="text/css">
+      body {
+        margin: .75em auto;
+        max-width: 40em;
+        width: 88%;
+      }
+
+      .title {
+          text-align: center;
+      }
+
+      article {
+        margin-bottom: 1.5em;
+      }
+
+      h1, h2, h3 {
+          margin: .5em 0;
+      }
+
+      p {
+          margin: .1em 0;
+      }
+
+      .byline {
+          font-size: smaller;
+          margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">The New York Times</h1>
+    <h2 class="title">Your Favorite Sections</h2>
+
+    <div>
+        <section id="artsSection">
+            <h2>ARTS</h2>
+            <p><a href="https://www.nytimes.com/section/arts">The New York Times: Arts</a></p>
+        </section>
+        <section id="foodSection">
+            <h2>FOOD</h2>
+            <p><a href="https://www.nytimes.com/section/food">The New York Times: Food</a></p>
+        </section>
+        <section id="sportsSection">
+            <h2>SPORTS</h2>
+            <p><a href="https://www.nytimes.com/section/sports">The New York Times: Sports</a></p>
+        </section>
+        <section id="travelSection">
+            <h2>TRAVEL</h2>
+            <p><a href="https://www.nytimes.com/section/travel">The New York Times: Travel</a></p>
+        </section>
+    </div>
+
+    <script>
+      let artsSection = document.querySelector("#artsSection");
+      let foodSection = document.querySelector("#foodSection");
+      let sportsSection = document.querySelector("#sportsSection");
+      let travelSection = document.querySelector("#travelSection");
+
+      // Render articles into the DOM
+      let render = function (results, section) {
+        // Assign first five article objects to a variable
+        let articles = results.slice(0, 5);
+        let html = " ";
+        let currentSection;
+        // Build html string of articles
+        articles.forEach((article) => {
+          html += `<article>
+                    <h3><a href="${article.url}">${article.title}</a></h3>
+                    <p class="byline">${article.byline}</p>
+                    <p>${article.abstract}</p>
+                   </article> 
+                `;
+        });
+        // Assign selector value to currentSection
+        section === "arts" ? currentSection = artsSection 
+        : section === "food" 
+        ? currentSection = foodSection 
+        : section === "sports" 
+        ? currentSection = sportsSection 
+        : currentSection = travelSection;
+
+        // Update DOM with a list of articles for the appropriate section
+        currentSection.innerHTML = `<h2>${section.toUpperCase()}</h2>
+                                     ${html}`;
+      };
+
+      // Build url
+      let buildUrl = (section) => {
+        let apiKey = `YG2X64hbcN9M1aIxxIwGx3GQLIOhecpr`;
+        let url = `https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=${apiKey}`;
+        return url;
+      };
+
+      // Get articles
+      let getArticles = () => {
+        let sections = ["arts", "food", "sports", "travel"];
+        // For each section, fetch articles from the API
+        sections.forEach((section) => {
+          fetch(buildUrl(section))
+            .then((response) =>
+              response.ok ? response.json() : Promise.reject(response)
+            )
+            .then((data) => {
+              // Render articles into the DOM
+              render(data.results, section);
+            })
+            .catch((err) => console.warn(`Error: ${err.statusText}`));
+        });
+      };
+
+      window.addEventListener("load", getArticles);
+    </script>
+  </body>
+</html>
