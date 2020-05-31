@@ -5,54 +5,80 @@
 
     <style type="text/css">
       body {
-        margin: .75em auto;
+        margin: 0.75em auto;
         max-width: 40em;
         width: 88%;
       }
 
       .title {
-          text-align: center;
+        text-align: center;
       }
 
       article {
         margin-bottom: 1.5em;
       }
 
-      h1, h2, h3 {
-          margin: .5em 0;
+      h1,
+      h2,
+      h3 {
+        margin: 0.5em 0;
       }
 
       p {
-          margin: .1em 0;
+        margin: 0.1em 0;
       }
 
       .byline {
-          font-size: smaller;
-          margin: 0;
+        font-size: smaller;
+        margin: 0;
       }
+
+      #testDiv {
+          background: yellow;
+
+      }
+
     </style>
   </head>
   <body>
     <h1 class="title">The New York Times</h1>
     <h2 class="title">Your Favorite Sections</h2>
+    
+    <div id="testDiv">Sanitize HTML test succesful if element text shows here: <span id="test"></span>  Test fails if alert appears.</div>
 
     <div>
-        <section id="artsSection">
-            <h2>ARTS</h2>
-            <p><a href="https://www.nytimes.com/section/arts">The New York Times: Arts</a></p>
-        </section>
-        <section id="foodSection">
-            <h2>FOOD</h2>
-            <p><a href="https://www.nytimes.com/section/food">The New York Times: Food</a></p>
-        </section>
-        <section id="sportsSection">
-            <h2>SPORTS</h2>
-            <p><a href="https://www.nytimes.com/section/sports">The New York Times: Sports</a></p>
-        </section>
-        <section id="travelSection">
-            <h2>TRAVEL</h2>
-            <p><a href="https://www.nytimes.com/section/travel">The New York Times: Travel</a></p>
-        </section>
+      <section id="artsSection">
+        <h2>ARTS</h2>
+        <p>
+          <a href="https://www.nytimes.com/section/arts"
+            >The New York Times: Arts</a
+          >
+        </p>
+      </section>
+      <section id="foodSection">
+        <h2>FOOD</h2>
+        <p>
+          <a href="https://www.nytimes.com/section/food"
+            >The New York Times: Food</a
+          >
+        </p>
+      </section>
+      <section id="sportsSection">
+        <h2>SPORTS</h2>
+        <p>
+          <a href="https://www.nytimes.com/section/sports"
+            >The New York Times: Sports</a
+          >
+        </p>
+      </section>
+      <section id="travelSection">
+        <h2>TRAVEL</h2>
+        <p>
+          <a href="https://www.nytimes.com/section/travel"
+            >The New York Times: Travel</a
+          >
+        </p>
+      </section>
     </div>
 
     <script>
@@ -60,6 +86,22 @@
       let foodSection = document.querySelector("#foodSection");
       let sportsSection = document.querySelector("#sportsSection");
       let travelSection = document.querySelector("#travelSection");
+
+      /*!
+       * Sanitize and encode all HTML in a user-submitted string
+       * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
+       * @param  {String} str  The user-submitted string
+       * @return {String} str  The sanitized string
+       */
+      let sanitizeHTML = (str) => {
+        let temp = document.createElement("div");
+        temp.textContent = str;
+        return temp.innerHTML;
+      };
+
+      // Test the sanitizeHTML function
+      let test = document.querySelector("#test");
+      test.innerHTML = sanitizeHTML('<img src=x onerror="alert(\'XSS Attack\')">');
 
       // Render articles into the DOM
       let render = function (results, section) {
@@ -70,19 +112,21 @@
         // Build html string of articles
         articles.forEach((article) => {
           html += `<article>
-                    <h3><a href="${article.url}">${article.title}</a></h3>
-                    <p class="byline">${article.byline}</p>
-                    <p>${article.abstract}</p>
+                    <h3><a href="${sanitizeHTML(article.url)}">${sanitizeHTML(article.title)}</a></h3>
+                    <p class="byline">${sanitizeHTML(article.byline)}</p>
+                    <p>${sanitizeHTML(article.abstract)}</p>
                    </article> 
                 `;
         });
+
         // Assign selector value to currentSection
-        section === "arts" ? currentSection = artsSection 
-        : section === "food" 
-        ? currentSection = foodSection 
-        : section === "sports" 
-        ? currentSection = sportsSection 
-        : currentSection = travelSection;
+        section === "arts"
+          ? (currentSection = artsSection)
+          : section === "food"
+          ? (currentSection = foodSection)
+          : section === "sports"
+          ? (currentSection = sportsSection)
+          : (currentSection = travelSection);
 
         // Update DOM with a list of articles for the appropriate section
         currentSection.innerHTML = `<h2>${section.toUpperCase()}</h2>
