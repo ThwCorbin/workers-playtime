@@ -34,16 +34,18 @@
       }
 
       #testDiv {
-          background: yellow;
+        background: yellow;
       }
-
     </style>
   </head>
   <body>
     <h1 class="title">The New York Times</h1>
     <h2 class="title">Your Favorite Sections</h2>
 
-    <div id="testDiv">Sanitize HTML test succesful if element text shows here: <span id="test"></span>  Test fails if alert appears.</div>
+    <div id="testDiv">
+      Sanitize HTML test succesful if element text shows here:
+      <span id="test"></span> Test fails if alert appears.
+    </div>
 
     <div>
       <section id="artsSection">
@@ -100,24 +102,27 @@
 
       // Test the sanitizeHTML function
       let test = document.querySelector("#test");
-      test.innerHTML = sanitizeHTML('<img src=x onerror="alert(\'XSS Attack\')">');
+      test.innerHTML = sanitizeHTML(
+        "<img src=x onerror=\"alert('XSS Attack')\">"
+      );
 
       // Render articles into the DOM
-      let render = function (results, section) {
+      let render = (results, section) => {
         // Assign first five article objects to a variable
         let articles = results.slice(0, 5);
         let html = " ";
         let currentSection;
         // Build html string of articles
         articles.forEach((article) => {
+          // prettier-ignore
           html += `<article>
-                    <h3><a href="${sanitizeHTML(article.url)}">${sanitizeHTML(article.title)}</a></h3>
+                    <h3><a href="${sanitizeHTML(article.url)}">${sanitizeHTML(
+                        article.title)}</a></h3>
                     <p class="byline">${sanitizeHTML(article.byline)}</p>
                     <p>${sanitizeHTML(article.abstract)}</p>
                    </article> 
                 `;
         });
-
         // Assign selector value to currentSection
         section === "arts"
           ? (currentSection = artsSection)
@@ -126,7 +131,6 @@
           : section === "sports"
           ? (currentSection = sportsSection)
           : (currentSection = travelSection);
-
         // Update DOM with a list of articles for the appropriate section
         currentSection.innerHTML = `<h2>${section.toUpperCase()}</h2>
                                      ${html}`;
