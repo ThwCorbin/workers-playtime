@@ -45,8 +45,8 @@
 	</footer>
 
 	<script>
-		// The monsters and socks
-		var monsters = [
+		// Array of monsters and socks
+		let monsters = [
 			'monster1',
 			'monster2',
 			'monster3',
@@ -61,6 +61,27 @@
 			'sock'
 		];
 
+
+    // Fisher–Yates Shuffle function adapted from a card game app I'm working on
+    const shuffle = (monsters) => {
+  
+  let unshuffledMonsters = monsters.length;
+  let randomUnshuffledMonster;
+
+  // While unshuffled elements remain
+  while (unshuffledMonsters) {
+    // Pick random number betweeen 0 inclusive and number of unshuffled elements
+    // Then decrement the number of unshuffled elements by 1
+    randomUnshuffledMonster = Math.floor(Math.random() * unshuffledMonsters--);
+    // Array destructuring: Swap the random card with the last unshuffled card in the array
+    [monsters[randomUnshuffledMonster], monsters[unshuffledMonsters]] = [
+      monsters[unshuffledMonsters],
+      monsters[randomUnshuffledMonster],
+    ];
+  }
+
+  return monsters;
+};
 		
 	</script>
 </body>
