@@ -125,11 +125,11 @@
 				let imgUrl =
 					"https://raw.githubusercontent.com/gist/cferdinandi/3e6b13f1e501e50ce90e92e1f6241258/raw/0891e58c68be46e5d6a6fc8b513ddc016c9d8ebb/";
 				
-				// Create a new array from the monsters array and then shuffle it
-				let newArray = shuffle(monsters.slice());
+				// Shuffle the array
+				shuffle(monsters);
 				// Build string of divs containing images
-				newArray.forEach((element) => {
-					html += `<div class="grid"><img src="${imgUrl}${element}.svg"></div>`;
+				monsters.forEach((element) => {
+					html += `<div class="grid"><img src="${imgUrl}${element}.svg" alt="${element}"></div>`;
 				});
 				// Update the DOM
 				app.innerHTML = html;
