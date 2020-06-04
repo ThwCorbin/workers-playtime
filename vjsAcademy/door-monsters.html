@@ -104,27 +104,35 @@
 				"sock",
 			];
 
-			// Toggle between monster and door images
+			// Hide door and show monster image
+			// If image is sock, end game and reset
 			const showImage = (e) => {
+				// If the target is the door image
 				if (e.target.className === "door") {
 					e.target.setAttribute("hidden", true);
+					// Reset...
 					if (e.target.nextElementSibling.id === "sock") {
 						e.target.nextElementSibling.removeAttribute("hidden");
 						alert("Sock!");
 						buildHTML();
 						return;
 					}
+					// ...or continue game
 					e.target.nextElementSibling.removeAttribute("hidden");
+					// If the target is the button parent element
 				} else if (e.target.className.includes("show-img")) {
 					e.target.firstElementChild.setAttribute("hidden", true);
+					// Reset...
 					if (e.target.lastElementChild.id === "sock") {
 					e.target.lastElementChild.removeAttribute("hidden");
 					alert("Sock!");
 					buildHTML();
 					return;
 					}
+					// ...or continue game
 					e.target.lastElementChild.removeAttribute("hidden");
 				} else {
+					// The target is not a door image nor a button
 					return;
 				}
 			};
