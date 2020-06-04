@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Monsters that move!</title>
+		<title>Monsters Behind Doors!</title>
 
 		<style type="text/css">
 			body {
@@ -13,20 +13,7 @@
 				color: mediumslateblue;
 			}
 
-			#moveMonsters {
-				width: 100px;
-				height: 100px;
-				border-width: 0.15em;
-				border-radius: 50%;
-				font-size: 1.25em;
-				box-shadow: 0.4em 0.4em mediumspringgreen;
-				color: deeppink;
-				background: honeydew;
-			}
-
-			/**
-		 * A simple grid layout
-		 */
+			/* A simple grid layout */
 			.row {
 				display: grid;
 				grid-template-columns: auto auto auto;
@@ -38,9 +25,7 @@
 				padding: 1em;
 			}
 
-			/**
-		 * Make sure images scale
-		 */
+			/* Make sure images scale */
 			img {
 				height: auto;
 				max-width: 100%;
@@ -48,8 +33,7 @@
 		</style>
 	</head>
 	<body>
-		<h1>Monsters that move!</h1>
-		<button id="moveMonsters">Move Monsters</button>
+		<h1>Monsters Behind Doors!</h1>
 		<div id="app" class="row"></div>
 
 		<footer>
@@ -79,8 +63,30 @@
 		</footer>
 
 		<script>
+			/**
+			 * Element.closest() polyfill
+			 * https://developer.mozilla.org/en-US/docs/Web/API/Element/closest#Polyfill
+			 */
+			if (!Element.prototype.closest) {
+				if (!Element.prototype.matches) {
+					Element.prototype.matches =
+						Element.prototype.msMatchesSelector ||
+						Element.prototype.webkitMatchesSelector;
+				}
+				Element.prototype.closest = function (s) {
+					var el = this;
+					var ancestor = this;
+					if (!document.documentElement.contains(el)) return null;
+					do {
+						if (ancestor.matches(s)) return ancestor;
+						ancestor = ancestor.parentElement;
+					} while (ancestor !== null);
+					return null;
+				};
+			}
+
+			// Selectors
 			let app = document.querySelector("#app");
-			let moveMonsters = document.querySelector("#moveMonsters");
 
 			// Array of monsters and a sock
 			let monsters = [
@@ -97,6 +103,31 @@
 				"monster11",
 				"sock",
 			];
+
+			// Toggle between monster and door images
+			const showImage = (e) => {
+				if (e.target.className === "door") {
+					e.target.setAttribute("hidden", true);
+					if (e.target.nextElementSibling.id === "sock") {
+						e.target.nextElementSibling.removeAttribute("hidden");
+						alert("Sock!");
+						buildHTML();
+						return;
+					}
+					e.target.nextElementSibling.removeAttribute("hidden");
+				} else if (e.target.className.includes("show-img")) {
+					e.target.firstElementChild.setAttribute("hidden", true);
+					if (e.target.lastElementChild.id === "sock") {
+					e.target.lastElementChild.removeAttribute("hidden");
+					alert("Sock!");
+					buildHTML();
+					return;
+					}
+					e.target.lastElementChild.removeAttribute("hidden");
+				} else {
+					return;
+				}
+			};
 
 			// Fisher–Yates Shuffle function adapted from a card game I'm working on
 			// https://www.thwcorbin.com/posts/shuffle-card-deck/
@@ -128,13 +159,19 @@
 				shuffle(monsters);
 				// Build string of divs containing images
 				monsters.forEach((element) => {
-					html += `<div class="grid"><img src="${imgUrl}${element}.svg" alt="${element}"></div>`;
+					html += `<button class="grid show-img" aria-live="polite">
+										<img class="door" src="${imgUrl}door.svg" alt="door">
+										<img id="${element}" src="${imgUrl}${element}.svg" alt="${element}" hidden>
+									</button>`;
 				});
 				// Update the DOM
 				app.innerHTML = html;
 			};
 
-			moveMonsters.addEventListener("click", buildHTML);
+			// document.addEventListener("click", (e) => {
+			// 	if(e.target.closest(".show-img")) showImage(e);
+			// });
+			document.addEventListener("click", showImage);
 			document.addEventListener("load", buildHTML());
 		</script>
 	</body>
