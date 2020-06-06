@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Monsters Keepers Losers Smelly!</title>
+
+		<style type="text/css">
+			body {
+				margin: 1em auto;
+				max-width: 40em;
+				width: 88%;
+				text-align: center;
+				font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+				color: mediumslateblue;
+			}
+
+			p {
+				font-size: 1.25em;
+				color: deeppink;
+			}
+
+			/* A simple grid layout */
+			.row {
+				display: grid;
+				grid-template-columns: auto auto auto;
+				text-align: center;
+			}
+
+			.grid {
+				min-height: 6em;
+				padding: 1em;
+			}
+
+			/* Make sure images scale */
+			img {
+				height: auto;
+				max-width: 100%;
+			}
+
+			/* Style buttons */
+			button {
+				background-color: transparent;
+				border: 0;
+			}
+
+			#resetBtn {
+				width: 85px;
+				height: 85px;
+				border-radius: 50%;
+				border: .15em solid teal;
+				font-size: 1.25em;
+				box-shadow: 0.3em 0.3em mediumspringgreen;
+				color: deeppink;
+				background: honeydew;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Monsters Keepers Losers Smelly</h1>
+		<p class="message">
+			Click doors to reveal monsters.<br />Can you find them all before you find
+			the sock?
+		</p>
+		<div id="app" class="row"></div>
+		<button id="resetBtn">Reset Game</button>
+
+		<footer>
+			<hr />
+			<p class="text-small text-muted">
+				Icons by
+				<a href="https://thenounproject.com/term/door/311732/"
+					>Jamie Dickinson</a
+				>,
+				<a href="https://thenounproject.com/term/monster/184225/"
+					>Nicky Knicky</a
+				>,
+				<a href="https://thenounproject.com/term/monster/1510400/"
+					>Alvaro Cabrera</a
+				>,
+				<a href="https://thenounproject.com/term/monster/28460/">Eliricon</a>,
+				<a href="https://thenounproject.com/term/monster/82823/">April Yang</a>,
+				<a href="https://thenounproject.com/term/monster/1062009/">tk66</a>,
+				<a href="https://thenounproject.com/term/monster/24990/">Alex WaZa</a>,
+				<a href="https://thenounproject.com/term/monster/37212/">Husein Aziz</a
+				>,
+				<a href="https://thenounproject.com/term/monster/2236082">iconcheese</a
+				>, and
+				<a href="https://thenounproject.com/term/socks/38451/">Yazmin Alanis</a
+				>.
+			</p>
+		</footer>
+
+		<script>
+			// Selectors
+			let message = document.querySelector(".message");
+			let app = document.querySelector("#app");
+			let resetBtn = document.querySelector("#resetBtn");
+
+			// Array of monsters and a sock
+			let monsters = [
+				"monster1",
+				"monster2",
+				"monster3",
+				"monster4",
+				"monster5",
+				"monster6",
+				"monster7",
+				"monster8",
+				"monster9",
+				"monster10",
+				"monster11",
+				"sock",
+			];
+			let viewedMonsters = [];
+			let gameOver = false;
+
+			// Hide door and show monster image
+			// If image is the sock or the player finds all the monsters, end game.
+			// monster is the clicked door button
+			const showImage = (monster) => {
+				// If the player won or lost the game, do not show new images
+				if (gameOver) return;
+				// If the monster has already been revealed, stop
+				if (viewedMonsters.includes(monster)) return;
+				// Add revealed monster to the array
+				viewedMonsters.push(monster);
+				// Hide the door and show the monster or sock
+				monster.firstElementChild.setAttribute("hidden", true);
+				monster.lastElementChild.removeAttribute("hidden");
+				// If image is the sock, display loser message and end game
+				if (monster.lastElementChild.id === "sock") {
+					message.innerHTML =
+						"You <strong>lose</strong> with a smelly sock.<br>Press the reset button to play again.";
+					gameOver = true;
+					return;
+				}
+				// If player finds all the monsters, display winner message and end game
+				if (viewedMonsters.length === 11) {
+					message.innerHTML =
+						"You <strong>win</strong> all the monsters!<br>Press the reset button to play again.";
+					gameOver = true;
+					return;
+				}
+			};
+
+			// Fisher–Yates Shuffle function adapted from a card game I'm working on
+			// https://www.thwcorbin.com/posts/shuffle-card-deck/
+			const shuffle = (array) => {
+				// Set initial number of unshuffled elements & random element
+				let unshuffledElements = array.length; // Number to decrement
+				let randomElement = null; // Number for random index
+
+				// While unshuffled elements remain
+				while (unshuffledElements) {
+					// Pick random number betweeen 0 inclusive and number of unshuffled elements
+					// Then decrement the number of unshuffled elements by 1
+					randomElement = Math.floor(Math.random() * unshuffledElements--);
+					// Array destructuring: Swap the random element with the last unshuffled element in the array
+					[array[randomElement], array[unshuffledElements]] = [
+						array[unshuffledElements],
+						array[randomElement],
+					];
+				}
+				return array;
+			};
+
+			// Build html to display monster images
+			const buildHTML = () => {
+				let html = "";
+				let imgUrl =
+					"https://raw.githubusercontent.com/gist/cferdinandi/b216c6c06685a381ec5bd547410d76c1/raw/ea404869e2c3b02738b36ccb9d82921f80cbf2bd/";
+				// Shuffle the array
+				shuffle(monsters);
+				// Build string of divs containing images
+				monsters.forEach((element) => {
+					html += `<div class="grid" aria-live="polite">
+										<button class="monster">
+											<img class="door" src="${imgUrl}door.svg" alt="Click the door">
+											<img id="${element}" src="${imgUrl}${element}.svg" alt="${element}" hidden>
+										</button>
+									</div>`;
+				});
+				// Update the DOM
+				app.innerHTML = html;
+			};
+
+			// Reset the game
+			const reset = () => {
+				viewedMonsters.length = 0;
+				message.innerHTML =
+					"Click doors to reveal monsters.<br />Can you find them all before you find the sock?";
+				gameOver = false;
+				buildHTML();
+			};
+
+			document.addEventListener("click", (e) => {
+				// Assign the clicked monster button to a variable
+				let monster = e.target.closest(".monster");
+				// If clicked element is not a monster button or a door image
+				!monster ? null : showImage(monster);
+			});
+			resetBtn.addEventListener("click", reset);
+			document.addEventListener("load", buildHTML());
+		</script>
+	</body>
+</html>
