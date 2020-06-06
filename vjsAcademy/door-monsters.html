@@ -13,6 +13,10 @@
 				color: mediumslateblue;
 			}
 
+			p {
+				color: deeppink;
+			}
+
 			/* A simple grid layout */
 			.row {
 				display: grid;
@@ -30,11 +34,33 @@
 				height: auto;
 				max-width: 100%;
 			}
+
+			/* Style buttons */
+			button {
+				background-color: transparent;
+				border: 0;
+			}
+
+			#resetBtn {
+				width: 100px;
+				height: 100px;
+				border-width: 0.15em;
+				border-radius: 50%;
+				font-size: 1.25em;
+				box-shadow: 0.4em 0.4em mediumspringgreen;
+				color: deeppink;
+				background: honeydew;
+			}
 		</style>
 	</head>
 	<body>
 		<h1>Monsters Behind Doors!</h1>
+		<p>
+			Click doors to reveal monsters.<br />Can you find them all before you find
+			the sock?
+		</p>
 		<div id="app" class="row"></div>
+		<button id="resetBtn">Reset Game</button>
 
 		<footer>
 			<hr />
@@ -63,30 +89,9 @@
 		</footer>
 
 		<script>
-			/**
-			 * Element.closest() polyfill
-			 * https://developer.mozilla.org/en-US/docs/Web/API/Element/closest#Polyfill
-			 */
-			if (!Element.prototype.closest) {
-				if (!Element.prototype.matches) {
-					Element.prototype.matches =
-						Element.prototype.msMatchesSelector ||
-						Element.prototype.webkitMatchesSelector;
-				}
-				Element.prototype.closest = function (s) {
-					var el = this;
-					var ancestor = this;
-					if (!document.documentElement.contains(el)) return null;
-					do {
-						if (ancestor.matches(s)) return ancestor;
-						ancestor = ancestor.parentElement;
-					} while (ancestor !== null);
-					return null;
-				};
-			}
-
 			// Selectors
 			let app = document.querySelector("#app");
+			let resetBtn = document.querySelector("#resetBtn");
 
 			// Array of monsters and a sock
 			let monsters = [
@@ -105,34 +110,15 @@
 			];
 
 			// Hide door and show monster image
-			// If image is sock, end game and reset
-			const showImage = (e) => {
+			// If image is sock, end game reset
+			const showImage = (monster) => {
+				// monster is the clicked button with the attribute monster-idx
+				monster.firstElementChild.setAttribute("hidden", true);
+				monster.lastElementChild.removeAttribute("hidden");
 				// If the target is the door image
-				if (e.target.className === "door") {
-					e.target.setAttribute("hidden", true);
-					// Reset...
-					if (e.target.nextElementSibling.id === "sock") {
-						e.target.nextElementSibling.removeAttribute("hidden");
-						alert("Sock!");
-						buildHTML();
-						return;
-					}
-					// ...or continue game
-					e.target.nextElementSibling.removeAttribute("hidden");
-					// If the target is the button parent element
-				} else if (e.target.className.includes("show-img")) {
-					e.target.firstElementChild.setAttribute("hidden", true);
-					// Reset...
-					if (e.target.lastElementChild.id === "sock") {
-					e.target.lastElementChild.removeAttribute("hidden");
+				if (monster.lastElementChild.id === "sock") {
 					alert("Sock!");
 					buildHTML();
-					return;
-					}
-					// ...or continue game
-					e.target.lastElementChild.removeAttribute("hidden");
-				} else {
-					// The target is not a door image nor a button
 					return;
 				}
 			};
@@ -167,19 +153,24 @@
 				shuffle(monsters);
 				// Build string of divs containing images
 				monsters.forEach((element) => {
-					html += `<button class="grid show-img" aria-live="polite">
-										<img class="door" src="${imgUrl}door.svg" alt="door">
-										<img id="${element}" src="${imgUrl}${element}.svg" alt="${element}" hidden>
-									</button>`;
+					html += `<div class="grid" aria-live="polite">
+										<button class="monster">
+											<img class="door" src="${imgUrl}door.svg" alt="Click the door">
+											<img id="${element}" src="${imgUrl}${element}.svg" alt="${element}" hidden>
+										</button>
+									</div>`;
 				});
 				// Update the DOM
 				app.innerHTML = html;
 			};
 
-			// document.addEventListener("click", (e) => {
-			// 	if(e.target.closest(".show-img")) showImage(e);
-			// });
-			document.addEventListener("click", showImage);
+			document.addEventListener("click", (e) => {
+				// Assign the clicked monster button to a variable
+				let monster = e.target.closest(".monster");
+				// If clicked element is not a monster button or a door image
+				!monster ? null : showImage(monster);
+			});
+			resetBtn.addEventListener("click", buildHTML);
 			document.addEventListener("load", buildHTML());
 		</script>
 	</body>
