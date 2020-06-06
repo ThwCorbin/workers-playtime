@@ -55,10 +55,10 @@
 		</style>
 	</head>
 	<body>
-		<h1>Monsters Keepers Losers Smelly</h1>
+		<h1>Monsters Keepers Losers Smelly!</h1>
 		<p class="message">
 			Click doors to reveal monsters.<br />Can you find them all before you find
-			the sock?
+			the socks?
 		</p>
 		<div id="app" class="row"></div>
 		<button id="resetBtn">Reset Game</button>
@@ -114,7 +114,7 @@
 			let gameOver = false;
 
 			// Hide door and show monster image
-			// If image is the sock or the player finds all the monsters, end game.
+			// If image is socks or the player finds all the monsters, end game.
 			// monster is the clicked door button
 			const showImage = (monster) => {
 				// If the player won or lost the game, do not show new images
@@ -126,10 +126,10 @@
 				// Hide the door and show the monster or sock
 				monster.firstElementChild.setAttribute("hidden", true);
 				monster.lastElementChild.removeAttribute("hidden");
-				// If image is the sock, display loser message and end game
+				// If image is socks, display loser message and end game
 				if (monster.lastElementChild.id === "sock") {
 					message.innerHTML =
-						"You <strong>lose</strong> with a smelly sock.<br>Press the reset button to play again.";
+						"You <strong>lose</strong> with smelly socks.<br>Press the reset button to play again.";
 					gameOver = true;
 					return;
 				}
@@ -187,7 +187,7 @@
 			const reset = () => {
 				viewedMonsters.length = 0;
 				message.innerHTML =
-					"Click doors to reveal monsters.<br />Can you find them all before you find the sock?";
+					"Click doors to reveal monsters.<br />Can you find them all before you find the socks?";
 				gameOver = false;
 				buildHTML();
 			};
