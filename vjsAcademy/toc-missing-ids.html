@@ -178,8 +178,8 @@
 
 			let checkForId = () => {
 				h2Array.forEach((h2) => {
-					// Add an id attribute using the value of text content
 					if (!h2.id) {
+					// Add an id attribute using the value of text content
 						h2.id = h2.textContent.replace(/[^a-z0-9]+/gi, "-").toLowerCase();
 						// Replace characters that are not letters nor numbers with a hypen
 					}
