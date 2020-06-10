@@ -178,15 +178,14 @@
 
 			let checkForId = () => {
 				h2Array.forEach((h2) => {
-					// Add an id attribute
+					// Add an id attribute using the value of text content
 					if (!h2.id) {
-						let idText = h2.textContent
+						h2.id = h2.textContent
 							// Replace characters that are not letters, numbers, nor hypens with a space
 							.replace(/[^-a-z0-9]/gi, " ")
 							// Replace whitespace with a hypen
 							.replace(/\s+/g, "-")
 							.toLowerCase();
-						h2.id = idText;
 					}
 				});
 			};
