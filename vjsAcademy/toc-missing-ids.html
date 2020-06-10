@@ -180,25 +180,21 @@
 				h2Array.forEach((h2) => {
 					// Add an id attribute using the value of text content
 					if (!h2.id) {
-						h2.id = h2.textContent
-							// Replace characters that are not letters, numbers, nor hypens with a space
-							.replace(/[^-a-z0-9]/gi, " ")
-							// Replace whitespace with a hypen
-							.replace(/\s+/g, "-")
-							.toLowerCase();
+						h2.id = h2.textContent.replace(/[^a-z0-9]+/gi, "-").toLowerCase();
+						// Replace characters that are not letters nor numbers with a hypen
 					}
 				});
 			};
 
 			// Create a table of contents from an array of h2 elements
 			let createTOC = () => {
-				if(h2Array.length){
-				checkForId();
-				h2Array.forEach((h2) => {
-					anchors += `<li><a href="#${h2.id}">${h2.textContent}</a></li>`;
-				});
-				// Inject into DOM
-				tableOfContents.innerHTML = `<ul>${anchors}</ul>`;
+				if (h2Array.length) {
+					checkForId();
+					h2Array.forEach((h2) => {
+						anchors += `<li><a href="#${h2.id}">${h2.textContent}</a></li>`;
+					});
+					// Inject into DOM
+					tableOfContents.innerHTML = `<ul>${anchors}</ul>`;
 				}
 				return;
 			};
