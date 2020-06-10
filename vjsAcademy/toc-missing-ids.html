@@ -192,12 +192,15 @@
 
 			// Create a table of contents from an array of h2 elements
 			let createTOC = () => {
+				if(h2Array.length){
 				checkForId();
 				h2Array.forEach((h2) => {
 					anchors += `<li><a href="#${h2.id}">${h2.textContent}</a></li>`;
 				});
 				// Inject into DOM
 				tableOfContents.innerHTML = `<ul>${anchors}</ul>`;
+				}
+				return;
 			};
 			createTOC();
 		</script>
