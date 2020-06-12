@@ -171,34 +171,36 @@
 		</footer>
 
 		<script>
-			let tableOfContents = document.querySelector("#table-of-contents");
-			// Create an array of h2 elements from a nodelist
-			let h2Array = Array.from(document.querySelectorAll("h2"));
-			let anchors = "";
+			(function () {
+				let tableOfContents = document.querySelector("#table-of-contents");
+				// Create an array of h2 elements from a nodelist
+				let h2Array = Array.from(document.querySelectorAll("h2"));
+				let anchors = "";
 
-			let checkForId = () => {
-				h2Array.forEach((h2) => {
-					if (!h2.id) {
-					// Add an id attribute using the value of text content
-						h2.id = h2.textContent.replace(/[^a-z0-9]+/gi, "-").toLowerCase();
-						// Replace characters that are not letters nor numbers with a hypen
-					}
-				});
-			};
-
-			// Create a table of contents from an array of h2 elements
-			let createTOC = () => {
-				if (h2Array.length) {
-					checkForId();
+				let checkForId = () => {
 					h2Array.forEach((h2) => {
-						anchors += `<li><a href="#${h2.id}">${h2.textContent}</a></li>`;
+						if (!h2.id) {
+							// Add an id attribute using the value of text content
+							h2.id = h2.textContent.replace(/[^a-z0-9]+/gi, "-").toLowerCase();
+							// Replace characters that are not letters nor numbers with a hypen
+						}
 					});
-					// Inject into DOM
-					tableOfContents.innerHTML = `<ul>${anchors}</ul>`;
-				}
-				return;
-			};
-			createTOC();
+				};
+
+				// Create a table of contents from an array of h2 elements
+				let createTOC = () => {
+					if (h2Array.length) {
+						checkForId();
+						h2Array.forEach((h2) => {
+							anchors += `<li><a href="#${h2.id}">${h2.textContent}</a></li>`;
+						});
+						// Inject into DOM
+						tableOfContents.innerHTML = `<ul>${anchors}</ul>`;
+					}
+					return;
+				};
+				createTOC();
+			})();
 		</script>
 	</body>
 </html>
